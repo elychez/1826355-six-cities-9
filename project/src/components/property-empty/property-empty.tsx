@@ -7,22 +7,22 @@ function PropertyEmpty(): JSX.Element {
         <div className="property__gallery-container container">
           <div className="property__gallery">
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/room.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/room.jpg" alt="studio"/>
             </div>
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/apartment-01.jpg" alt="studio"/>
             </div>
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/apartment-02.jpg" alt="studio"/>
             </div>
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/apartment-03.jpg" alt="studio"/>
             </div>
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/studio-01.jpg" alt="studio"/>
             </div>
             <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+              <img className="property__image" src="img/apartment-01.jpg" alt="studio"/>
             </div>
           </div>
         </div>
@@ -103,25 +103,14 @@ function PropertyEmpty(): JSX.Element {
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74"
-                       alt="Host avatar"/>
+                  <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
                 </div>
-                <span className="property__user-name">
-                    Angelina
-                  </span>
-                <span className="property__user-status">
-                    Pro
-                  </span>
+                <span className="property__user-name">Angelina</span>
+                <span className="property__user-status">Pro</span>
               </div>
               <div className="property__description">
-                <p className="property__text">
-                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                  building is green and from 18th century.
-                </p>
-                <p className="property__text">
-                  An independent House, strategically located between Rembrand Square and National Opera, but where the
-                  bustle of the city comes to rest in this alley flowery and colorful.
-                </p>
+                <p className="property__text">A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.</p>
+                <p className="property__text">An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.</p>
               </div>
             </div>
             <section className="property__reviews reviews">
@@ -130,12 +119,9 @@ function PropertyEmpty(): JSX.Element {
                 <li className="reviews__item">
                   <div className="reviews__user user">
                     <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                      <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54"
-                           alt="Reviews avatar"/>
+                      <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
                     </div>
-                    <span className="reviews__user-name">
-                        Max
-                      </span>
+                    <span className="reviews__user-name">Max</span>
                   </div>
                   <div className="reviews__info">
                     <div className="reviews__rating rating">
