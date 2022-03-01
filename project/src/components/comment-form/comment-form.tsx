@@ -15,8 +15,7 @@ function CommentForm(): JSX.Element {
   }
 
   function postData() {
-    const body = { rating, message };
-    return body;
+    return { rating, message };
   }
 
   return (

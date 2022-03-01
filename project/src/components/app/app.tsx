@@ -8,20 +8,17 @@ import FavoritesScreen from '../favorites-screen/favorites-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Property from '../property/property';
 import { Offer } from '../../types/offers';
-import { Review } from '../../types/reviews';
 import Favorites from '../../types/favorites';
 
 type AppScreenProps = {
   rentCount: number;
   offers: Offer[];
-  reviews: Review[];
   favorites: Favorites[];
 };
 
 function App({
   rentCount,
   offers,
-  reviews,
   favorites,
 }: AppScreenProps): JSX.Element {
   return (
