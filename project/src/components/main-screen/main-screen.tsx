@@ -2,13 +2,28 @@ import Header from '../header/header';
 import React from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import { Offer } from '../../types/offers';
+import { POINTS } from '../../mocks/points';
+import {Map} from '../map/map';
+import { CITY } from '../../mocks/city';
 
 type MainScreenProps = {
   rentCount: number;
   offers: Offer[];
 };
 
+// type CurrentPointType = {
+//   title: string;
+//   lat: number;
+//   lng: number;
+// };
+
 function MainScreen({ rentCount, offers }: MainScreenProps): JSX.Element {
+
+  // const onListItemHover = (listItemName: string) => {
+  //   const currentPoint = POINTS.find((point) => point.title === listItemName);
+  //   setSelectedPoint(currentPoint);
+  // };
+
   return (
     <div className='page page--gray page--main'>
       <Header />
@@ -85,11 +100,17 @@ function MainScreen({ rentCount, offers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <PlaceCardList offers={offers} />
+                <PlaceCardList offers={offers}/>
               </div>
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map' />
+              <section className='cities__map map'>
+                <Map
+                  city={CITY}
+                  points={POINTS}
+                  selectedPoint={POINTS[0]}
+                />
+              </section>
             </div>
           </div>
         </div>
