@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import * as leaflet from 'leaflet';
-import useMap from '../../useMap';
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
+import useMap from '../../hooks/useMap';
+import {ICON_ANCHOR_SIZE, ICON_SIZE, URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 import { City } from '../../types/city';
 import { Points } from '../../types/points';
 
@@ -18,14 +18,14 @@ function Map({ city, points, selectedPoint }: MapProps) {
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: ICON_SIZE,
+    iconAnchor: ICON_ANCHOR_SIZE,
   });
 
   const currentCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_CURRENT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: ICON_SIZE,
+    iconAnchor: ICON_ANCHOR_SIZE,
   });
 
   useEffect(() => {

@@ -9,17 +9,20 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Property from '../property/property';
 import { Offer } from '../../types/offers';
 import Favorites from '../../types/favorites';
+import {Review} from '../../types/reviews';
 
 type AppScreenProps = {
   rentCount: number;
   offers: Offer[];
   favorites: Favorites[];
+  reviews: Review[];
 };
 
 function App({
   rentCount,
   offers,
   favorites,
+  reviews,
 }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
@@ -29,7 +32,7 @@ function App({
           element={<MainScreen rentCount={rentCount} offers={offers} />}
         />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Room} element={<Property />} />
+        <Route path={AppRoute.Room} element={<Property reviews={reviews} />} />
         <Route
           path={AppRoute.Favorites}
           element={

@@ -100,7 +100,7 @@ function MainScreen({ rentCount, offers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <PlaceCardList offers={offers}/>
+                <PlaceCardList offers={offers} isCitiesPlaces/>
               </div>
             </section>
             <div className='cities__right-section'>

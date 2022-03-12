@@ -4,19 +4,31 @@ import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
   offer: Offer;
+  isCitiesPlaces: boolean;
 };
 
-function PlaceCard({ offer }: PlaceCardProps): JSX.Element {
+function PlaceCard({
+  offer,
+  isCitiesPlaces = true,
+}: PlaceCardProps): JSX.Element {
   const [, setActivePlaceCard] = useState<null | number>(null);
 
   return (
     <article
       key={offer.id}
-      className='cities__place-card place-card'
+      className={`${
+        isCitiesPlaces ? 'cities__place-card' : 'near-places__card'
+      } place-card`}
       onMouseOver={() => setActivePlaceCard(offer.id)}
       onMouseLeave={() => setActivePlaceCard(null)}
     >
-      <div className='cities__image-wrapper place-card__image-wrapper'>
+      <div
+        className={`${
+          isCitiesPlaces
+            ? 'cities__image-wrapper'
+            : 'near-places__image-wrapper'
+        } place-card__image-wrapper`}
+      >
         <Link to={`/offer/${offer.id}`}>
           <img
             className='place-card__image'

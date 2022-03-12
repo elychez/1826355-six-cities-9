@@ -28,7 +28,7 @@ function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
                   </div>
                   <div className='favorites__places'>
                     {offers.map((offer: Offer) => (
-                      <PlaceCard key={offer.id} offer={offer} />
+                      <PlaceCard key={offer.id} offer={offer} isCitiesPlaces />
                     ))}
                   </div>
                 </li>
