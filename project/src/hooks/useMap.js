@@ -26,6 +26,7 @@ function useMap(mapRef, city) {
 
       setMap(instance);
     }
+    map?.flyTo({ lat: city.lat, lng: city.lng }, city.zoom);
   }, [mapRef, map, city]);
 
   return map;

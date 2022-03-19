@@ -2,21 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { favorites } from './mocks/favorites';
-import { offers } from './mocks/offers';
 import { reviews } from './mocks/reviews';
-
-const Setting = {
-  RENT_COUNT: 5,
-};
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      rentCount={Setting.RENT_COUNT}
-      favorites={favorites}
-      offers={offers}
-      reviews={reviews}
-    />
+    <Provider store={store}>
+      <App
+        favorites={favorites}
+        reviews={reviews}
+      />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

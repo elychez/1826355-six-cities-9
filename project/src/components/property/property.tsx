@@ -4,16 +4,25 @@ import CommentForm from '../comment-form/comment-form';
 import ReviewList from '../review-list/review-list';
 import { Review } from '../../types/reviews';
 import { Map } from '../map/map';
-import { CITY } from '../../mocks/city';
-import { POINTS } from '../../mocks/points';
 import PlaceCardList from '../place-card-list/place-card-list';
-import { offers } from '../../mocks/offers';
+import { useAppSelector } from '../../hooks/store';
 
 type PropertyProps = {
   reviews: Review[];
 };
 
 function Property({ reviews }: PropertyProps): JSX.Element {
+  const cityOffers = useAppSelector((state) => state.cityOffers);
+  const currentCity = useAppSelector((state) => state.city);
+
+  function getAllPoints() {
+    return cityOffers.map((item) => ({
+      title: item.city.title,
+      lat: item.location.lat,
+      lng: item.location.lng,
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -165,7 +174,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
             </div>
           </div>
           <section className='property__map map'>
-            <Map points={POINTS.slice(0, 3)} city={CITY} selectedPoint={POINTS[0]} />
+            <Map city={currentCity} points={getAllPoints()} />
           </section>
         </section>
         <div className='container'>
@@ -173,7 +182,7 @@ function Property({ reviews }: PropertyProps): JSX.Element {
             <h2 className='near-places__title'>
               Other places in the neighbourhood
             </h2>
-            <PlaceCardList offers={offers.slice(0 ,3)} isCitiesPlaces={false} />
+            <PlaceCardList isCitiesPlaces={false} />
           </section>
         </div>
       </main>

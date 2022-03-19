@@ -1,13 +1,13 @@
 import { User } from './user';
 
 export type City = {
-  location: Location;
-  name: string;
+  location: TLocation;
+  title: string;
 };
 
-export type Location = {
-  latitude: number;
-  longitude: number;
+export type TLocation = {
+  lat: number;
+  lng: number;
   zoom: number;
 };
 
@@ -17,11 +17,11 @@ export type Offer = {
   description: string;
   goods: string[];
   host: User;
-  id: number;
+  id: any;
   images: string[];
   isFavorite: boolean;
   isPremium: boolean;
-  location: Location;
+  location: TLocation;
   maxAdults: number;
   previewImage: string;
   price: number;

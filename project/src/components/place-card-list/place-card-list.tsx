@@ -1,23 +1,24 @@
 import PlaceCard from '../place-card/place-card';
 import React from 'react';
-import { Offer } from '../../types/offers';
+import { useAppSelector } from '../../hooks/store';
 
 type PlaceCardListProps = {
-  offers: Offer[];
   isCitiesPlaces: boolean;
 };
 
 function PlaceCardList({
-  offers,
   isCitiesPlaces = true,
 }: PlaceCardListProps): JSX.Element {
+  const offers = useAppSelector((state) => state.cityOffers);
+  const currentCityOffers = isCitiesPlaces ? offers : offers.slice(0, 3);
+
   return (
     <div
       className={`${
         isCitiesPlaces ? 'cities__places-list' : 'near-places__list'
       } places__list tabs__content`}
     >
-      {offers.map((offer) => (
+      {currentCityOffers.map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}

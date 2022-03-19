@@ -1,6 +1,10 @@
-import { Offer } from '../../types/offers';
-import { useState } from 'react';
+import { Offer, TLocation } from '../../types/offers';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/store';
+import { changeSelectedPoint } from '../../store/actions';
+import { DEFAULT_SELECTED_POINT } from '../../const';
+import {getPercent} from '../../utils';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -11,7 +15,14 @@ function PlaceCard({
   offer,
   isCitiesPlaces = true,
 }: PlaceCardProps): JSX.Element {
-  const [, setActivePlaceCard] = useState<null | number>(null);
+  const [activePlaceCard, setActivePlaceCard] = useState<TLocation>(
+    DEFAULT_SELECTED_POINT,
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(changeSelectedPoint(activePlaceCard));
+  }, [activePlaceCard]);
 
   return (
     <article
@@ -19,8 +30,8 @@ function PlaceCard({
       className={`${
         isCitiesPlaces ? 'cities__place-card' : 'near-places__card'
       } place-card`}
-      onMouseOver={() => setActivePlaceCard(offer.id)}
-      onMouseLeave={() => setActivePlaceCard(null)}
+      onMouseOver={() => setActivePlaceCard(offer.location)}
+      onMouseLeave={() => setActivePlaceCard(DEFAULT_SELECTED_POINT)}
     >
       <div
         className={`${
@@ -32,10 +43,10 @@ function PlaceCard({
         <Link to={`/offer/${offer.id}`}>
           <img
             className='place-card__image'
-            src={offer.previewImage}
             width='260'
             height='200'
             alt='Place image'
+            src={offer.previewImage}
           />
         </Link>
       </div>
@@ -57,7 +68,7 @@ function PlaceCard({
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{ width: '80%' }} />
+            <span style={{ width: getPercent(offer.rating, 5) }} />
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
