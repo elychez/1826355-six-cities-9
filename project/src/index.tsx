@@ -5,14 +5,17 @@ import { favorites } from './mocks/favorites';
 import { reviews } from './mocks/reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import ErrorMessage from './error-message/error-message';
+import { checkAuthAction, fetchOfferAction } from './store/api-actions';
+
+store.dispatch(fetchOfferAction());
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        favorites={favorites}
-        reviews={reviews}
-      />
+      <ErrorMessage />
+      <App favorites={favorites} reviews={reviews} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

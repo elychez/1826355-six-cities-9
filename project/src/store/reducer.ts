@@ -6,9 +6,9 @@ import {
   changeCity,
   changeSelectedPoint, changeSort,
   loadFavorites,
-  loadOffers
+  loadOffers, requireAuthorization, setError
 } from './actions';
-import {DEFAULT_SELECTED_POINT, SortType} from '../const';
+import {Authorization, DEFAULT_SELECTED_POINT, SortType} from '../const';
 import {offers} from '../mocks/offers';
 
 const INITIAL_OFFERS: Offer[] = offers.filter((item) => item.city.title === 'Paris');
@@ -21,6 +21,9 @@ const initialState = {
   cityOffers: INITIAL_OFFERS,
   offers: offers,
   sort: SortType.Default,
+  authorizationStatus: Authorization.Unknown,
+  INITIAL_ERROR: '',
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) =>
@@ -30,6 +33,7 @@ const reducer = createReducer(initialState, (builder) =>
     })
     .addCase(loadOffers, (state, action) => {
       state.cityOffers = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(loadFavorites, (state, action) => {
       state.favoriteCity = action.payload;
@@ -39,6 +43,12 @@ const reducer = createReducer(initialState, (builder) =>
     })
     .addCase(changeSort, (state, action) => {
       state.sort = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.INITIAL_ERROR = action.payload;
     }),
 );
 

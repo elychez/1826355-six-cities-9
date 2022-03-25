@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { FormEvent, useRef } from 'react';
 import Header from '../header/header';
+import { useAppDispatch } from '../../hooks/store';
+import { AuthData } from '../../types/auth-data';
+import { loginAction } from '../../store/api-actions';
 
 function Login(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+  };
+
   return (
     <>
       <Header />
@@ -9,7 +32,7 @@ function Login(): JSX.Element {
         <div className='page__favorites-container container'>
           <section className='login'>
             <h1 className='login__title'>Sign in</h1>
-            <form className='login__form form' action='#' method='post'>
+            <form className='login__form form' action="" onSubmit={handleSubmit}>
               <div className='login__input-wrapper form__input-wrapper'>
                 <label className='visually-hidden'>E-mail</label>
                 <input
