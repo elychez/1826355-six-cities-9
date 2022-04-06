@@ -2,12 +2,12 @@ import { User } from './user';
 
 export type City = {
   location: TLocation;
-  title: string;
+  name: string;
 };
 
 export type TLocation = {
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   zoom: number;
 };
 

@@ -41,13 +41,13 @@ function Map({ city, points }: MapProps) {
         leaflet
           .marker(
             {
-              lat: point.lat,
-              lng: point.lng,
+              lat: point.latitude,
+              lng: point.longitude,
             },
             {
               icon: selectedPoint !== undefined &&
-              point.lat === selectedPoint?.lat &&
-              point.lng === selectedPoint?.lng ? currentCustomIcon : defaultCustomIcon,
+              point.latitude=== selectedPoint?.latitude &&
+              point.longitude === selectedPoint?.longitude ? currentCustomIcon : defaultCustomIcon,
             },
           )
           .addTo(map);

@@ -8,8 +8,8 @@ function useMap(mapRef, city) {
     if (mapRef.current !== null && map === null) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: city.lat,
-          lng: city.lng,
+          lat: city.latitude,
+          lng: city.longitude,
         },
         zoom: city.zoom,
       });
@@ -26,7 +26,7 @@ function useMap(mapRef, city) {
 
       setMap(instance);
     }
-    map?.flyTo({ lat: city.lat, lng: city.lng }, city.zoom);
+    map?.flyTo({ lat: city.latitude, lng: city.longitude }, city.zoom);
   }, [mapRef, map, city]);
 
   return map;

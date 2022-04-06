@@ -7,26 +7,17 @@ import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Property from '../property/property';
-import Favorites from '../../types/favorites';
-import { Review } from '../../types/reviews';
 import { useAppSelector } from '../../hooks/store';
 import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
-type AppScreenProps = {
-  favorites: Favorites[];
-  reviews: Review[];
-};
-
-function App({favorites, reviews}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector(
     (state) => state,
   );
-  const isCheckedAuth = (authorization: Authorization): boolean =>
-    authorization === Authorization.NotAuthorized;
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isDataLoaded) {
     return <LoadingScreen />;
   }
   return (
@@ -47,11 +38,11 @@ function App({favorites, reviews}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen favorites={favorites} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Room} element={<Property reviews={reviews} />} />
+        <Route path={AppRoute.Room} element={<Property />} />
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
     </HistoryRouter>

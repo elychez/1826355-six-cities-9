@@ -1,12 +1,12 @@
-import React, { FormEvent, useRef } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Header from '../header/header';
 import { useAppDispatch } from '../../hooks/store';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 
 function Login(): JSX.Element {
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
 
@@ -16,11 +16,12 @@ function Login(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    setLogin(evt.currentTarget.email.value);
+    setPassword(evt.currentTarget.password.value);
+    if (login && password) {
       onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
+        login: login,
+        password: password,
       });
     }
   };
@@ -32,7 +33,12 @@ function Login(): JSX.Element {
         <div className='page__favorites-container container'>
           <section className='login'>
             <h1 className='login__title'>Sign in</h1>
-            <form className='login__form form' action="" onSubmit={handleSubmit}>
+            <form
+              className='login__form form'
+              action='#'
+              method='post'
+              onSubmit={handleSubmit}
+            >
               <div className='login__input-wrapper form__input-wrapper'>
                 <label className='visually-hidden'>E-mail</label>
                 <input

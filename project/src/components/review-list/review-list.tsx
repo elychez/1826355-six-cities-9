@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReviewItem from '../review-item/review-item';
-import {Review} from '../../types/reviews';
+import { store } from '../../store';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/store';
 
 type ReviewListProps = {
-  reviews: Review[];
-}
+  offerId?: string;
+};
 
-function ReviewList({reviews}: ReviewListProps): JSX.Element {
+function ReviewList({ offerId }: ReviewListProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+
+  useEffect(() => {
+    store.dispatch(fetchReviewsAction(Number(offerId)));
+  }, []);
+
   return (
     <div>
       {reviews.map((review) => (

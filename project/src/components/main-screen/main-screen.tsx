@@ -14,9 +14,9 @@ function MainScreen(): JSX.Element {
   function getAllPoints() {
 
     return offers.map((item) => ({
-      title: item.city.title,
-      lat: item.location.lat,
-      lng: item.location.lng,
+      name: item.city.name,
+      latitude: item.location.latitude,
+      longitude: item.location.longitude,
     }));
   }
 
@@ -35,7 +35,7 @@ function MainScreen(): JSX.Element {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {cityOffers.length} places to stay in {currentCity.title}
+                {cityOffers.length} places to stay in {currentCity.name}
               </b>
               <Sorting/>
               <div className='cities__places-list places__list tabs__content'>

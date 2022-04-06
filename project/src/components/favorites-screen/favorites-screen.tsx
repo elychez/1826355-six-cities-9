@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../header/header';
-import Favorites from '../../types/favorites';
-import { Offer } from '../../types/offers';
-import PlaceCard from '../place-card/place-card';
+import { useAppSelector } from '../../hooks/store';
+import { CITIES } from '../../const';
+import FavoritesItems from '../favorites-items/favorites-items';
+import { store } from '../../store';
+import { getFavorites } from '../../store/api-actions';
 
-type FavoritesScreenProps = {
-  favorites: Favorites[];
-};
+function FavoritesScreen(): JSX.Element {
+  const favorites = useAppSelector((state) => state.favorites);
+  const filteredOffers = favorites.filter((item) => item.isFavorite);
 
-function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
+  useEffect(() => {
+    store.dispatch(getFavorites());
+  }, []);
+
   return (
     <>
       <Header />
@@ -17,21 +22,14 @@ function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
           <section className='favorites'>
             <h1 className='favorites__title'>Saved listing</h1>
             <ul className='favorites__list'>
-              {favorites.map(({ id, city, offers }: Favorites) => (
-                <li key={id} className='favorites__locations-items'>
-                  <div className='favorites__locations locations locations--current'>
-                    <div className='locations__item'>
-                      <a className='locations__item-link' href='#'>
-                        <span>{city}</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className='favorites__places'>
-                    {offers.map((offer: Offer) => (
-                      <PlaceCard key={offer.id} offer={offer} isCitiesPlaces />
-                    ))}
-                  </div>
-                </li>
+              {CITIES.map((cityName) => (
+                <FavoritesItems
+                  key={cityName.name}
+                  cityName={cityName.name}
+                  offers={filteredOffers.filter(
+                    (offer) => offer.city.name === cityName.name,
+                  )}
+                />
               ))}
             </ul>
           </section>

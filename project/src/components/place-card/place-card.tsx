@@ -1,10 +1,12 @@
 import { Offer, TLocation } from '../../types/offers';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/store';
-import { changeSelectedPoint } from '../../store/actions';
-import { DEFAULT_SELECTED_POINT } from '../../const';
-import {getPercent} from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
+import { changeSelectedPoint, redirectToRoute } from '../../store/actions';
+import { AppRoute, Authorization, DEFAULT_SELECTED_POINT } from '../../const';
+import { getPercent } from '../../utils';
+import {changeFavoriteStatusAction, getFavorites} from '../../store/api-actions';
+import { store } from '../../store';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -15,6 +17,8 @@ function PlaceCard({
   offer,
   isCitiesPlaces = true,
 }: PlaceCardProps): JSX.Element {
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+
   const [activePlaceCard, setActivePlaceCard] = useState<TLocation>(
     DEFAULT_SELECTED_POINT,
   );
@@ -23,6 +27,24 @@ function PlaceCard({
   useEffect(() => {
     dispatch(changeSelectedPoint(activePlaceCard));
   }, [activePlaceCard]);
+
+  const getOfferStatus = (favorite: boolean) => {
+    let status: number;
+    favorite ? (status = 0) : (status = 1);
+
+    return status;
+  };
+
+  const onClickFavoriteButton = (offerId: number) => {
+    if (authStatus === Authorization.Authorized) {
+      dispatch(
+        changeFavoriteStatusAction(offerId, getOfferStatus(offer.isFavorite)),
+      );
+      dispatch(getFavorites);
+    } else {
+      return store.dispatch(redirectToRoute(AppRoute.Login));
+    }
+  };
 
   return (
     <article
@@ -57,7 +79,12 @@ function PlaceCard({
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
           <button
-            className='place-card__bookmark-button place-card__bookmark-button--active button'
+            className={`${
+              offer.isFavorite
+                ? 'place-card__bookmark-button--active'
+                : 'place-card__bookmark-button'
+            } button`}
+            onClick={() => onClickFavoriteButton(offer.id)}
             type='button'
           >
             <svg className='place-card__bookmark-icon' width='18' height='19'>
