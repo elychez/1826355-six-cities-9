@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Эльчин Гасанов](https://up.htmlacademy.ru/react/9/user/1826355).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Кислый](https://htmlacademy.ru/profile/smart-grizzly).
 
 ---
 
