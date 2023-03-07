@@ -30,7 +30,6 @@ function Header(): JSX.Element {
                   className='header__nav-link header__nav-link--profile'
                   href='#'
                 >
-                  <div className='header__avatar-wrapper user__avatar-wrapper'></div>
                   {authorizationStatus === Authorization.Authorized && (
                     <Link to={AppRoute.Favorites} className='header__user-name user__name'>
                       {userData?.email}

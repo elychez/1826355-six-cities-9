@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Offer } from '../types/offers';
-import { CITY } from '../mocks/city';
+import { CITY } from '../city';
 import {
   changeCity, changeFavoriteOffer,
   changeLoadStatus,

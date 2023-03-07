@@ -9,7 +9,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Property from '../property/property';
 import { useAppSelector } from '../../hooks/store';
 import LoadingScreen from '../loading-screen/loading-screen';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
